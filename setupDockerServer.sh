@@ -33,6 +33,7 @@ docker run -d \
   -p 27017-27019:27017-27019 \
   -e MONGO_INITDB_ROOT_USERNAME='admin' \
   -e MONGO_INITDB_ROOT_PASSWORD='admin' \
+  -v /tmp/mongodb:/data/db \
   mongo:4.0.4
 echo 'Mongo Starting'
 sleep 30s
