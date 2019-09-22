@@ -1,21 +1,40 @@
 #!/bin/bash
 echo 'Beginning Server Setup'
-wget https://raw.githubusercontent.com/Mwalte39/campusheatmapdockersetup/master/influxdb.conf
+mkdir campusHeatMapServices
+cd campusHeatMapServices
 echo 'Pulling and Running INFLUXDB'
-docker run --name influxdb \
+docker run -d \
+  --name influxdb \
   -p 8083:8083 -p 8086:8086 \
   -v $PWD/influxdb:/var/lib/influxdb \
-  -v $PWD/influxdb.conf:/etc/influxdb/influxdb.conf:ro \
-  -v $PWD/types.db:/usr/share/collectd/types.db:ro \
-  influxdb:1.0
+  -e INFLUXDB_ADMIN_USER='admin' \
+  -e INFLUXDB_ADMIN_PASSWORD='admin' \
+  -e INFLUXDB_HTTP_AUTH_ENABLED='true' \
+  influxdb:latest
+echo 'Influx Starting'
+sleep 30s
+echo 'Influx Started'
 echo 'Pulling and Running GRAFANA'
-docker run --name grafana \
+docker run -d \
+  --name grafana \
   -p 3000:3000 \
   -v $PWD/grafana:/var/lib/grafana \
   --link influxdb \
   grafana/grafana:3.1.1
-echo 'Restarting Influx'
+echo 'Grafana Starting'
+sleep 30s
+echo 'Grafana Started'
+echo 'Adding Admin for Influx'
 docker restart influxdb
-docker exec influxdb CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES
-echo 'influxdb created with username and password admin'
-
+echo 'influxdb created with username and password admin CHANGE THIS ASAP'
+echo 'Pulling and Running MONGODB'
+docker run -d \
+  --name mongodb \
+  -p 27017-27019:27017-27019 \
+  -e MONGO_INITDB_ROOT_USERNAME='admin' \
+  -e MONGO_INITDB_ROOT_PASSWORD='admin' \
+  mongo:4.0.4
+echo 'Mongo Starting'
+sleep 30s
+echo 'Mongo Started'
+echo 'MongoDB created with username and password admin CHANGE THIS ASAP'
