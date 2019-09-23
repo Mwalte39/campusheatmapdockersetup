@@ -36,5 +36,34 @@ docker run -d \
   couchbase
 echo 'COUCHBASEDB Starting'
 sleep 30s
+
+
+varip="$(ip route get 1 | awk '{print $NF;exit}')"
+
+echo $varip
+
+curl -u Administrator:password -v -X POST \
+http://varip:8091/node/controller/setupServices \
+-d 'services=kv%2Cn1ql%2Cindex'
+
+curl -v -X POST \
+http://$varip:8091/nodes/self/controller/settings \
+-d 'path=%2Fopt%2Fcouchbase%2Fvar%2Flib%2Fcouchbase%2Fdata&index_path= \
+%2Fopt%2Fcouchbase%2Fvar%2Flib%2Fcouchbase%2Fdata'
+
+curl -v -X POST \
+http://$varip:8091/settings/web \
+-d 'password=password&username=Administrator&port=SAME'
+
+curl -u Administrator:password -v -X POST \
+http://$varip:8091/pools/default/buckets \
+-d 'flushEnabled=1&threadsNumber=3&replicaIndex=0&replicaNumber=0&evictionPolicy= \
+valueOnly&ramQuotaMB=597&bucketType=membase&name=default&authType=sasl&saslPassword='
+
+curl -u Administrator:password -X POST  \
+http://$varip:8091/pools/default \
+-d 'memoryQuota=1024' -d 'indexMemoryQuota=256'
+
+echo 'COUCHBASEDB created with username Administrator and password password CHANGE THIS ASAP'
+
 echo 'COUCHBASEDB Started'
-echo 'COUCHBASEDB created with username and password admin CHANGE THIS ASAP'
