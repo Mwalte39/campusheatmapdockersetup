@@ -27,15 +27,14 @@ echo 'Grafana Started'
 echo 'Adding Admin for Influx'
 docker restart influxdb
 echo 'influxdb created with username and password admin CHANGE THIS ASAP'
-echo 'Pulling and Running MONGODB'
+echo 'Pulling and Running COUCHBASEDB'
 docker run -d \
-  --name mongodb \
-  -p 27017-27019:27017-27019 \
-  -e MONGO_INITDB_ROOT_USERNAME='admin' \
-  -e MONGO_INITDB_ROOT_PASSWORD='admin' \
-  -v /tmp/mongodb:/data/db \
-  mongo:4.0.4
-echo 'Mongo Starting'
+  --name couchbasedb \
+  -p 8091-8094:8091-8094 \
+  -p 11210:11210 \
+  -v $PWD/couchbase:/opt/couchbase/var\
+  couchbase
+echo 'COUCHBASEDB Starting'
 sleep 30s
-echo 'Mongo Started'
-echo 'MongoDB created with username and password admin CHANGE THIS ASAP'
+echo 'COUCHBASEDB Started'
+echo 'COUCHBASEDB created with username and password admin CHANGE THIS ASAP'
