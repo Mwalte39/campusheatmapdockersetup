@@ -1,8 +1,5 @@
 FROM node:12.2.0
 
-# set working directory
-WORKDIR /UI
-
 # install and cache app dependencies
 COPY ./UI/ui-4155/ui4155/package.json /app/package.json
 RUN npm install
