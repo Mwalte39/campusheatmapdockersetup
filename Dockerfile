@@ -2,6 +2,8 @@ FROM node:12.2.0
 
 ENV PATH /app/node_modules/.bin:$PATH
 
+WORKDIR /app
+
 # install and cache app dependencies
 COPY ./UI/ui-4155/ui4155/package.json /app/package.json
 RUN npm install npm@latest -g
