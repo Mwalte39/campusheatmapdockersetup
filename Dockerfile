@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ./UI/ui-4155/ui4155/package.json /app/package.json
 RUN npm install npm@latest -g
 RUN npm install
-RUN npm install -g @angular/cli@7.3.9
+RUN npm install -g @angular/cli@8.2.4
 
 # add app
 COPY ./UI/ui-4155/ui4155 /app
