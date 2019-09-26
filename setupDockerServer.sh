@@ -2,6 +2,8 @@
 echo 'Beginning Server Setup'
 mkdir campusHeatMapServices
 cd campusHeatMapServices
+echo 'creating dockernet'
+docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 dockernet
 echo 'Getting createAngularApp.sh'
 wget https://raw.githubusercontent.com/Mwalte39/campusheatmapdockersetup/master/createAngularApp.sh
 echo 'Pulling and Running INFLUXDB'
