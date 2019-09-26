@@ -22,6 +22,8 @@ RUN npm run ng build -- --prod --output-path=dist
 
 FROM nginx:1.14.1-alpine
 
+WORKDIR /ng-app
+
 ## Copy our default nginx config
 COPY ./nginx/default.conf /etc/nginx/conf.d/
 
