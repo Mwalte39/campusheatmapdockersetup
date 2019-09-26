@@ -2,9 +2,12 @@
 echo 'Beginning Server Setup'
 mkdir campusHeatMapServices
 cd campusHeatMapServices
+echo 'Getting createAngularApp.sh'
+wget https://raw.githubusercontent.com/Mwalte39/campusheatmapdockersetup/master/createAngularApp.sh
 echo 'Pulling and Running INFLUXDB'
 docker run -d \
   --name influxdb \
+  --net=dockernet \
   -p 8083:8083 -p 8086:8086 \
   -v $PWD/influxdb:/var/lib/influxdb \
   -e INFLUXDB_ADMIN_USER='admin' \
@@ -17,6 +20,7 @@ echo 'Influx Started'
 echo 'Pulling and Running GRAFANA'
 docker run -d \
   --name grafana \
+  --net=dockernet \
   -p 3000:3000 \
   -v $PWD/grafana:/var/lib/grafana \
   --link influxdb \
@@ -29,6 +33,7 @@ docker restart influxdb
 echo 'influxdb created with username and password admin CHANGE THIS ASAP'
 echo 'Pulling and Running COUCHBASEDB'
 docker run -d \
+  --net=dockernet \
   --name couchbasedb \
   -p 8091-8094:8091-8094 \
   -p 11210:11210 \
@@ -67,3 +72,6 @@ http://$varip:8091/pools/default \
 echo 'COUCHBASEDB created with username Administrator and password password CHANGE THIS ASAP'
 
 echo 'COUCHBASEDB Started'
+echo 'Executing createAngularApp.sh'
+chmod 777 ./createAngularApp.sh
+./createAngularApp.sh
