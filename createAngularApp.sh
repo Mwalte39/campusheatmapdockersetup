@@ -12,9 +12,9 @@ wget https://raw.githubusercontent.com/Mwalte39/campusheatmapdockersetup/master/
 cd UI
 git clone --single-branch --branch remove-private-vars https://github.com/danielhirt/ui-4155
 cd ../
-docker build . -t 4155ui:0.1
+docker build . -t 4155ui:0.2
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
   --net=dockernet \
-  4155ui:0.1 
+  4155ui:0.2 
