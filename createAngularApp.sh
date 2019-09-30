@@ -17,9 +17,9 @@ cd UI
 rm -r ui-4155
 git clone --single-branch --branch "$branch" https://github.com/danielhirt/ui-4155
 cd ../
-docker build . -t "4155ui$branch":0.24
+docker build . -t "4155ui$branch":0.25
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
   --net=host \
-  "4155ui$branch":0.24
+  "4155ui$branch":0.25
