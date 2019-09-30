@@ -15,10 +15,10 @@ wget https://raw.githubusercontent.com/Mwalte39/campusheatmapdockersetup/master/
 cd UI
 git clone --single-branch --branch "$branch" https://github.com/danielhirt/ui-4155
 cd ../
-docker build . -t "4155ui$branch":0.22
+docker build . -t "4155ui$branch":0.23
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
   --net=dockernet \
-  "4155ui$branch":0.22
+  "4155ui$branch":0.23
 
