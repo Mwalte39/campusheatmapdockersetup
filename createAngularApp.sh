@@ -21,5 +21,5 @@ docker build . -t "4155ui$branch":0.25
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
-  --net=host \
+  --net=dockernet \
   "4155ui$branch":0.25
