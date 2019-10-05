@@ -3,7 +3,7 @@
 # We label our stage as â€˜builderâ€™
 FROM node:10-alpine as builder
 
-COPY ./UI/ui-4155/ui4155/package.json ./UI/ui-4155/ui4155/package-lock.json ./
+COPY ./UI/ui-4155/ui4155/angular-client/package.json ./UI/ui-4155/ui4155/angular-client/package-lock.json ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
 
