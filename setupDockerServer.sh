@@ -20,6 +20,8 @@ echo 'Influx Starting'
 sleep 30s
 echo 'Influx Started'
 echo 'Pulling and Running GRAFANA'
+mkdir grafana
+chown 472:472 grafana
 docker run -d \
   --name grafana \
   --net=dockernet \
