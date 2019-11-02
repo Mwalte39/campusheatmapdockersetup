@@ -21,5 +21,14 @@ docker build . -t "4155ui$branch":0.25
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
+  --restart always \
   --net=dockernet \
+  --name grafana \
   "4155ui$branch":0.25
+  
+docker run -d \
+  --name campusHeatMapAPI \
+  --restart always \
+  -p 8080:8080 \
+  --net=dockernet \
+  dhirt/4155-repo:api-v1.0.2-SPRT-1-PRODv2
