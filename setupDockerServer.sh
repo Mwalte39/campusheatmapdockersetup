@@ -30,7 +30,7 @@ docker run -d \
   -p 3000:3000 \
   -v $PWD/grafana:/var/lib/grafana \
   --link influxdb \
-  grafana/grafana:latest
+  grafana/grafana:6.4.3
 echo 'Grafana Starting'
 sleep 30s
 echo 'Grafana Started'
