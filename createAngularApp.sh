@@ -23,7 +23,6 @@ docker run -d \
   -p 4200:80 \
   --restart always \
   --net=dockernet \
-  --name grafana \
   "4155ui$branch":0.25
   
 docker run -d \
