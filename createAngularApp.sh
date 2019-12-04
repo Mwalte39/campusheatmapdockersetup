@@ -17,7 +17,7 @@ cd UI
 rm -r ui-4155
 git clone --single-branch --branch "$branch" https://github.com/danielhirt/ui-4155
 cd ../
-docker build . -t "4155ui$branch":0.25
+docker build . -t "4155ui$branch":0.8
 docker run -d \
   --name campusHeatMapUI \
   -p 4200:80 \
@@ -31,4 +31,4 @@ docker run -d \
   --restart always \
   -p 8080:8080 \
   --net=dockernet \
-  dhirt/4155-repo:api-v1.0.2-SPRT-1-PRODv2
+  dhirt/4155-repo:api-deploy-v13
